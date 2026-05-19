@@ -1,0 +1,23 @@
+services:
+  app:
+    image: httpd:latest
+    ports:
+      - 8081:80
+    volumes:
+      - ./html:/usr/local/apache2/htdocs
+  node:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+  db:  
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
